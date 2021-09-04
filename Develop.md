@@ -27,7 +27,12 @@
 
 - AWS Toolkit
 
-## Python Package
+## Python Develop
 
-- black
-- flake8
+- black:フォーマッター
+- flake8:コードチェッカー
+
+## git
+
+- .gitignore作成
+<https://www.toptal.com/developers/gitignore>
