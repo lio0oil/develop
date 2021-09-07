@@ -51,6 +51,7 @@ $ cp ./web/uwsgi.ini ./src/config/config/
 - launch.json
 - uwsgi.ini
 - 上のcpコマンド
+- collectstaticのコマンド
 
 ### 3.djanogoのアプリを新規作成 (Option)
 
@@ -171,7 +172,7 @@ $ ecs-cli push XXXXXXXXXXXX.dkr.ecr.ap-northeast-1.amazonaws.com/django-ecs-ngin
 ### 8.ECS クラスターの作成(Option)
 
 ```PowerShell
-$ aws ecs create-cluster --cluster-name fargate-cluster --region ap-northeast-1
+$ aws ecs create-cluster --cluster-name fargate-cluster --settings "name=containerInsights,value=enabled" --region ap-northeast-1
 
 {
     "cluster": {
