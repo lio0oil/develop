@@ -205,6 +205,11 @@ $ aws ecs create-cluster --cluster-name fargate-cluster --region ap-northeast-1
 
 書きかけ とりあえずコンソールから実施
 
+タスク設定のPoint
+ポートマッピングにnginxが80、webが8001
+起動順にnginxにweb start
+環境変数にSERVER_NAME localhost
+
 fargate配下のdocker-compose.ymlのimageを修正
 imageはリポジトリの作成の際のrepositoryUri
 
