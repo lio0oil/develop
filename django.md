@@ -233,3 +233,6 @@ AWS Copilot CLI
 
 fargateアプリケーションをprivate subnetに配置する場合の注意点
 <https://qiita.com/nyamada43/items/d3caa54443cc555e0406>
+
+ブラウザキャッシュ対策 Cache Busting
+<https://webty.jp/staffblog/production/post-1181/>
