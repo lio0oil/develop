@@ -78,6 +78,8 @@ $ python src/config/manage.py collectstatic
 
 #dockerを起動
 $ docker-compose up -d
+#dockerを起動する際にキャッシュを使いたくない時
+$ docker-compose build --no-cache
 ```
 
 <http://127.0.0.1:8080/polls/>にアクセスして動作確認
@@ -103,7 +105,7 @@ Amazon ECS CLI のインストール
 ```PowerShell
 #コンテナ毎に作成する
 #XXXXXXXXXXXXはアカウントID
-$ aws ecr create-repository --repository-name django-ecs-web
+$ aws ecr create-repository --repository-name django-ecs-web --image-scanning-configuration scanOnPush=true
 
 {
     "repository": {
@@ -122,7 +124,7 @@ $ aws ecr create-repository --repository-name django-ecs-web
     }
 }
 
-$ aws ecr create-repository --repository-name django-ecs-nginx
+$ aws ecr create-repository --repository-name django-ecs-nginx --image-scanning-configuration scanOnPush=true
 
 {
     "repository": {
@@ -157,9 +159,9 @@ $ docker tag django-ecs-nginx:latest XXXXXXXXXXXX.dkr.ecr.ap-northeast-1.amazona
 $ docker images
 
 REPOSITORY                                                           TAG       IMAGE ID       CREATED          SIZE
-836529485854.dkr.ecr.ap-northeast-1.amazonaws.com/django-ecs-nginx   latest    9dc2dedb9ba0   16 minutes ago   145MB
+XXXXXXXXXXXX.dkr.ecr.ap-northeast-1.amazonaws.com/django-ecs-nginx   latest    9dc2dedb9ba0   16 minutes ago   145MB
 django-ecs-nginx                                                     latest    9dc2dedb9ba0   16 minutes ago   145MB
-836529485854.dkr.ecr.ap-northeast-1.amazonaws.com/django-ecs-web     latest    ecc7e9c55376   20 minutes ago   1GB
+XXXXXXXXXXXX.dkr.ecr.ap-northeast-1.amazonaws.com/django-ecs-web     latest    ecc7e9c55376   20 minutes ago   1GB
 django-ecs-web                                                       latest    ecc7e9c55376   20 minutes ago   1GB
 django_web                                                           latest    ed816f3f5513   2 hours ago      963MB
 nginx                                                                latest    822b7ec2aaf2   46 hours ago     133MB
@@ -209,7 +211,7 @@ $ aws ecs create-cluster --cluster-name fargate-cluster --settings "name=contain
 タスク設定のPoint
 ポートマッピングにnginxが80、webが8001
 起動順にnginxにweb start
-環境変数にSERVER_NAME localhost
+環境変数にSERVER_NAME 127.0.0.1
 
 fargate配下のdocker-compose.ymlのimageを修正
 imageはリポジトリの作成の際のrepositoryUri
