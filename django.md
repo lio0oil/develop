@@ -147,6 +147,11 @@ $ aws ecr create-repository --repository-name django-ecs-nginx --image-scanning-
 ### 7.イメージ作成、ECR登録
 
 ```PowerShell
+#イメージスキャン
+docker scan --file .\web\Dockerfile-web django_web    
+```
+
+```PowerShell
 #イメージ作成
 $ docker build -t django-ecs-web -f ./web/Dockerfile-web .
 $ docker build -t django-ecs-nginx -f ./web/Dockerfile-nginx .
@@ -236,3 +241,4 @@ fargateアプリケーションをprivate subnetに配置する場合の注意�
 
 ブラウザキャッシュ対策 Cache Busting
 <https://webty.jp/staffblog/production/post-1181/>
+
